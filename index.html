@@ -234,9 +234,12 @@ footer { text-align: center; color: var(--grigio); font-size: 12px; padding: 8px
     </div>
   </section>
 </main>
-<footer>Associazione Guide e Scouts Cattolici Italiani · WAGGGS&nbsp;/&nbsp;WOSM&nbsp;Member</footer>
+<footer>Associazione Guide e Scouts Cattolici Italiani · WAGGGS&nbsp;/&nbsp;WOSM&nbsp;Member<br><span id="versione-utenti"></span></footer>
 
-<script src="utenti.js"></script>
+<script>
+/* Carica sempre l'ultimo elenco utenti, senza la copia in cache del browser */
+document.write('<script src="utenti.js?v=' + Date.now() + '"><\/script>');
+</script>
 <script>
 /*!
 
@@ -896,6 +899,7 @@ var CRIPTO = (function () {
       return;
     }
     if (!numeroUtenti()) $('nessun-utente').hidden = false;
+    if (CONFIG.aggiornato) $('versione-utenti').textContent = 'Elenco tesorieri del ' + CONFIG.aggiornato;
     var s = sessioneSalvata();
     if (s) avvia(s); else mostra('v-accesso');
   }
